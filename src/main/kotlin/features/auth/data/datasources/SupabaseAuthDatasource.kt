@@ -1,6 +1,5 @@
 package com.thewritebrothers.features.auth.data.datasources
 
-import com.auth0.jwt.JWT
 import com.thewritebrothers.features.auth.domain.entities.User
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.OtpType
@@ -8,7 +7,6 @@ import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
 import java.time.LocalDateTime
-import java.util.*
 
 class SupabaseAuthDatasource(private val supabase: SupabaseClient) {
     suspend fun signInWithEmailAndPassword(email:String, password:String): String {
@@ -70,7 +68,7 @@ class SupabaseAuthDatasource(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun sendEmailVerification(email : String): String? {
+    suspend fun sendEmailVerification(email : String): String {
         try {
             val session = supabase.auth
             val currentUser = session.currentSessionOrNull()
@@ -90,14 +88,14 @@ class SupabaseAuthDatasource(private val supabase: SupabaseClient) {
     }
 
     private fun isEmailVerified(email: String): Boolean {
-        return try {
+         try {
             val session = supabase.auth
             val currentUser = session.currentUserOrNull()
-            if (currentUser?.emailConfirmedAt != null) {
-                true
-            } else {
-                false
-            }
+             return if (currentUser?.emailConfirmedAt != null && currentUser.email == email) {
+                 true
+             } else {
+                 false
+             }
         } catch (e: Exception) {
             throw Exception("Authentication failed: ${e.message}")
         }
