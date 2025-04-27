@@ -1,10 +1,10 @@
 package com.thewritebrothers.features.billing.di
 
+import com.thewritebrothers.features.auth.domain.repositories.UserRepository
 import com.thewritebrothers.features.billing.data.datasource.BillingDatasource
 import com.thewritebrothers.features.billing.data.repositories.BillingRepositoryImpl
 import com.thewritebrothers.features.billing.domain.repositories.BillingRepository
-import com.thewritebrothers.features.billing.domain.usecases.HandleWebhookUseCase
-import com.thewritebrothers.features.billing.domain.usecases.InitiateCheckoutUseCase
+import com.thewritebrothers.features.billing.domain.usecases.*
 import com.thewritebrothers.features.billing.presentation.controllers.BillingController
 import io.github.cdimascio.dotenv.Dotenv
 import io.github.jan.supabase.SupabaseClient
@@ -25,15 +25,19 @@ fun billingModule(dotenv: Dotenv) = module {
             supabase = get<SupabaseClient>()
         )
     }
-    single<BillingRepository> { BillingRepositoryImpl(get(), get())}
+    single<BillingRepository> { BillingRepositoryImpl(get<BillingDatasource>(), get<Application>())}
 
     //Domain Layer
-    factory { InitiateCheckoutUseCase(get(), get()) }
-    factory { HandleWebhookUseCase(get(), get()) }
+    factory { InitiateCheckoutUseCase(get<UserRepository>(), get<BillingRepository>()) }
+    factory { HandleWebhookUseCase(get<BillingRepository>(), get<UserRepository>()) }
 
     //Presentation
     single { BillingController(
-        get(), get(), get(),
-        get(), get(), get<Application>()
+        get<InitiateCheckoutUseCase>(),
+        get<HandleWebhookUseCase>(),
+        get<ProcessPaymentUseCase>(),
+        get<GetSubscriptionPlansUseCase>(),
+        get<GetBillingHistoryUseCase>(),
+        get<Application>()
     ) }
 }
