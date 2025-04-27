@@ -1,7 +1,7 @@
 package com.thewritebrothers.features.auth.data.datasources
 
 import com.thewritebrothers.features.auth.domain.entities.User
-import com.thewritebrothers.features.auth.presentation.models.dto.UserProfileUpdate
+import com.thewritebrothers.features.auth.domain.entities.UserProfileUpdate
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.from
