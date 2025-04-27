@@ -1,7 +1,7 @@
 package com.thewritebrothers
 
-import com.thewritebrothers.features.auth.di.authModule
-import com.thewritebrothers.features.billing.di.billingModule
+import com.thewritebrothers.core.di.authModule
+import com.thewritebrothers.core.di.billingModule
 import io.github.cdimascio.dotenv.dotenv
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
