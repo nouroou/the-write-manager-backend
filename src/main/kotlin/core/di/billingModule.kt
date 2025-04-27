@@ -1,4 +1,4 @@
-package com.thewritebrothers.features.billing.di
+package com.thewritebrothers.core.di
 
 import com.thewritebrothers.features.auth.domain.repositories.UserRepository
 import com.thewritebrothers.features.billing.data.datasource.BillingDatasource
