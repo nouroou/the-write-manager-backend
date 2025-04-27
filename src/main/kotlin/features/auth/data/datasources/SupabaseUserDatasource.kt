@@ -1,7 +1,7 @@
 package com.thewritebrothers.features.auth.data.datasources
 
 import com.thewritebrothers.features.auth.domain.entities.User
-import com.thewritebrothers.features.auth.domain.entities.UserProfileUpdate
+import com.thewritebrothers.features.auth.presentation.models.dto.UserProfileUpdate
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.from
@@ -31,6 +31,7 @@ class SupabaseUserDatasource(private val supabase: SupabaseClient, private val a
         ): Boolean {
         try {
             val updatedData = UserProfileUpdate(
+
                 billed = isBilled,
                 role = role,
                 stripeCustomerId = stripeCustomerId,
