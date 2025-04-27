@@ -8,7 +8,7 @@ data class Task(
     val title: String,
     val description: String,
     val dueDate: LocalDateTime,
-    val members: List<User>,
+    val membersIdList: List<String>,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
     val completed: Boolean,
