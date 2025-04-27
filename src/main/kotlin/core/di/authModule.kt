@@ -1,4 +1,4 @@
-package com.thewritebrothers.features.auth.di
+package com.thewritebrothers.core.di
 
 import com.thewritebrothers.features.auth.data.datasources.SupabaseAuthDatasource
 import com.thewritebrothers.features.auth.data.datasources.SupabaseUserDatasource
