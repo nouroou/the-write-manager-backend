@@ -1,7 +1,7 @@
 package com.thewritebrothers
 
 import com.thewritebrothers.core.di.authModule
-import com.thewritebrothers.core.di.billingModule
+//import com.thewritebrothers.core.di.billingModule
 import io.github.cdimascio.dotenv.dotenv
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -49,7 +49,8 @@ fun Application.module() {
                 }
             },
             authModule(),
-            billingModule(dotenv),
+//            Commented out because it doesn't exist in feature/auth yet
+//            billingModule(dotenv),
         )
     }
 
