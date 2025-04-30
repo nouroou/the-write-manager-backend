@@ -9,6 +9,7 @@ build/
 .env
 serviceAccountKey.json
 application.conf
+local.properties
 
 ### STS ###
 .apt_generated
