@@ -50,6 +50,8 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:auth-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
+    // Ktor engine
+    implementation("io.ktor:ktor-client-java:$KTOR_VERSION")
 
     //Database
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
