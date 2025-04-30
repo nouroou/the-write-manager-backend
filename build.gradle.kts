@@ -1,5 +1,10 @@
 import io.ktor.plugin.*
 
+val exposed_version = "0.45.0"
+val logback_version = "1.5.13"
+val postgresql_version = "42.7.2"
+val hikari_version = "5.0.1"
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -41,7 +46,18 @@ dependencies {
     implementation("io.ktor:ktor-server-cors:$KTOR_VERSION")
     // Supabase
     implementation("io.github.jan-tennert.supabase:gotrue-kt:2.4.1")
-    implementation("io.github.jan-tennert.supabase:postgrest-kt:2.4.1")
+    implementation(platform("io.github.jan-tennert.supabase:bom:$KTOR_VERSION"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:auth-kt")
+    implementation("io.github.jan-tennert.supabase:realtime-kt")
+
+    //Database
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
+    implementation("org.postgresql:postgresql:$postgresql_version")
+    implementation("com.zaxxer:HikariCP:$hikari_version")
     //Stripe
     implementation("com.stripe:stripe-java:29.0.0")
     //Env
@@ -49,6 +65,9 @@ dependencies {
     //Injection
     implementation("io.insert-koin:koin-ktor:4.0.4")
     implementation("io.insert-koin:koin-logger-slf4j:4.0.4")
+    //Logging
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("io.ktor:ktor-server-call-logging:$KTOR_VERSION")
 
 
 }
