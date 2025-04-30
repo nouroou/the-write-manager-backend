@@ -4,6 +4,7 @@ val exposed_version = "0.45.0"
 val logback_version = "1.5.13"
 val postgresql_version = "42.7.2"
 val hikari_version = "5.0.1"
+val supabase_version = "2.4.1"
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -45,13 +46,15 @@ dependencies {
     implementation("io.ktor:ktor-server-auth-jwt:$KTOR_VERSION")
     implementation("io.ktor:ktor-server-cors:$KTOR_VERSION")
     // Supabase
-    implementation("io.github.jan-tennert.supabase:gotrue-kt:2.4.1")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:$supabase_version")
     implementation(platform("io.github.jan-tennert.supabase:bom:$KTOR_VERSION"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.github.jan-tennert.supabase:auth-kt")
-    implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:$supabase_version")
+    implementation("io.github.jan-tennert.supabase:auth-kt:$supabase_version")
+    implementation("io.github.jan-tennert.supabase:realtime-kt:$supabase_version")
     // Ktor engine
     implementation("io.ktor:ktor-client-java:$KTOR_VERSION")
+    implementation("io.ktor:ktor-client-core:$KTOR_VERSION")
+    implementation("io.ktor:ktor-utils:$KTOR_VERSION")
 
     //Database
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
