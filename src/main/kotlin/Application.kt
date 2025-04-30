@@ -3,6 +3,7 @@ package com.thewritebrothers
 import com.thewritebrothers.core.di.authModule
 //import com.thewritebrothers.core.di.billingModule
 import io.github.cdimascio.dotenv.dotenv
+import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.ktor.http.*
@@ -19,10 +20,9 @@ fun main(args: Array<String>) {
 
 
 fun Application.module() {
-
-    configureSerialization()
-    configureRouting()
     configureAuthentication()
+    configureRouting()
+    configureSerialization()
 
     val dotenv = dotenv {
         ignoreIfMissing = true // Don't fail if .env is not present (e.g., in production using system env vars)
@@ -42,8 +42,9 @@ fun Application.module() {
                 single {
                     createSupabaseClient(
                         supabaseUrl = dotenv["SUPABASE_URL"],
-                        supabaseKey = dotenv["SUPABASE_SERVICE_KEY"]
+                        supabaseKey = dotenv["SUPABASE_ANON_KEY"]
                     ) {
+                        install(Auth)
                         install(Postgrest)
                     }
                 }
